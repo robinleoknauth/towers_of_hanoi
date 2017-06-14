@@ -55,14 +55,28 @@ class TowersOfHanoi
     until won?
       render
       puts "From which tower do you want to move?"
-      from_tower = gets.chomp.to_i - 1
-      puts "To which tower do you want to move?"
-      to_tower = gets.chomp.to_i - 1
-      if valid_move?(from_tower, to_tower)
-        move(from_tower, to_tower)
+      from_tower = gets.chomp
+
+      if (1..3).to_a.include?(from_tower.to_i)
+        puts "To which tower do you want to move?"
       else
-        puts "I am sorry, that is not a valid move."
+        puts "Invalid input. Please type a number corresponding to a tower, i.e. 1-3."
+        next
       end
+
+      to_tower = gets.chomp
+
+      if (1..3).to_a.include?(to_tower.to_i)
+        if valid_move?(from_tower.to_i - 1, to_tower.to_i - 1)
+          move(from_tower.to_i - 1, to_tower.to_i - 1)
+        else
+          puts "Sorry, that is not a valid move."
+        end
+      else
+        puts "Invalid input. Please type a number corresponding to a tower, i.e. 1-3."
+        next
+      end
+
     end
     render
     puts "Congrats! You won!"
