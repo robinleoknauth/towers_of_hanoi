@@ -46,9 +46,7 @@ class TowersOfHanoi
     @towers = [[3, 2, 1], [], []]
   end
 
-  def towers
-    @towers
-  end
+  
 
   def play
 
