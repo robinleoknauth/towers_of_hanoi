@@ -43,18 +43,34 @@ class TowersOfHanoi
   attr_accessor :towers
 
   def initialize(towers)
-    @towers = [[3,2,1], [], []]
+    @towers = [[3, 2, 1], [], []]
   end
 
   def play
 
-    until game_over?
+    until won?
     end
   end
 
-  def game_over?
-    towers[1] == [3,2,1] || towers[2] == [3,2,1]
+  def move(source_tower, target_tower)
+    @towers[target_tower] << @towers[source_tower].pop
   end
 
-  
+  def valid_move?(source_tower, target_tower)
+    return true if @towers[target_tower].last.nil
+    return false if @towers[source_tower].last.nil
+
+    @towers[target_tower] > @towers[source_tower]
+  end
+
+  def won?
+    towers[1] == [3, 2, 1] || towers[2] == [3, 2, 1]
+  end
+
+
+  def render
+    puts "Tower 1  ->  #{@towers[0]}"
+    puts "Tower 2  ->  #{@towers[1]}"
+    puts "Tower 3  ->  #{@towers[2]}"
+  end
 end
