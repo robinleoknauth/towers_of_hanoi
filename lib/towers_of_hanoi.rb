@@ -40,5 +40,21 @@
 # methods named above.
 
 class TowersOfHanoi
+  attr_accessor :towers
 
+  def initialize(towers)
+    @towers = [[3,2,1], [], []]
+  end
+
+  def play
+
+    until game_over?
+    end
+  end
+
+  def game_over?
+    towers[1] == [3,2,1] || towers[2] == [3,2,1]
+  end
+
+  
 end
