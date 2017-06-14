@@ -42,25 +42,41 @@
 class TowersOfHanoi
   attr_accessor :towers
 
-  def initialize(towers)
+  def initialize
     @towers = [[3, 2, 1], [], []]
+  end
+
+  def towers
+    @towers
   end
 
   def play
 
     until won?
+      render
+      puts "From which tower do you want to move?"
+      from_tower = gets.chomp.to_i - 1
+      puts "To which tower do you want to move?"
+      to_tower = gets.chomp.to_i - 1
+      if valid_move?(from_tower, to_tower)
+        move(from_tower, to_tower)
+      else
+        puts "I am sorry, that is not a valid move."
+      end
     end
+    render
+    puts "Congrats! You won!"
   end
 
-  def move(source_tower, target_tower)
-    @towers[target_tower] << @towers[source_tower].pop
+  def move(from_tower, to_tower)
+    @towers[to_tower] << @towers[from_tower].pop
   end
 
-  def valid_move?(source_tower, target_tower)
-    return true if @towers[target_tower].last.nil
-    return false if @towers[source_tower].last.nil
+  def valid_move?(from_tower, to_tower)
+    return false if @towers[from_tower].last.nil?
+    return true if @towers[to_tower].last.nil?
 
-    @towers[target_tower] > @towers[source_tower]
+    @towers[to_tower].last > @towers[from_tower].last
   end
 
   def won?
@@ -69,8 +85,14 @@ class TowersOfHanoi
 
 
   def render
+    puts "--------------------------"
     puts "Tower 1  ->  #{@towers[0]}"
     puts "Tower 2  ->  #{@towers[1]}"
     puts "Tower 3  ->  #{@towers[2]}"
+    puts "--------------------------"
   end
+end
+
+if  $PROGRAM_NAME == __FILE__
+  TowersOfHanoi.new.play
 end
